@@ -104,18 +104,17 @@ void Dual_Resampler::dual_play( long count, dsample_t* out, Blip_Buffer& blip_bu
 
 void Dual_Resampler::mix_samples( Blip_Buffer& blip_buf, dsample_t* out )
 {
-	Blip_Reader sn;
-	int bass = sn.begin( blip_buf );
+        BLIP_READER_BEGIN(bass, blip_buf);
 	const dsample_t* in = sample_buf.begin();
 	
 	for ( int n = sample_buf_size >> 1; n--; )
 	{
-		int s = sn.read();
+		int s = BLIP_READER_READ( bass );
 		blargg_long l = (blargg_long) in [0] * 2 + s;
 		if ( (BOOST::int16_t) l != l )
 			l = 0x7FFF - (l >> 24);
 		
-		sn.next( bass );
+                BLIP_READER_NEXT( bass, BLIP_READER_BASS( blip_buf ) );
 		blargg_long r = (blargg_long) in [1] * 2 + s;
 		if ( (BOOST::int16_t) r != r )
 			r = 0x7FFF - (r >> 24);
@@ -126,6 +125,6 @@ void Dual_Resampler::mix_samples( Blip_Buffer& blip_buf, dsample_t* out )
 		out += 2;
 	}
 	
-	sn.end( blip_buf );
+        BLIP_READER_END( bass, blip_buf );
 }
 
