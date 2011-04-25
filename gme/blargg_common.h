@@ -10,6 +10,7 @@
 #include <limits.h>
 
 typedef const char* blargg_err_t; // 0 on success, otherwise error string
+const char* const gme_wrong_file_type = "Wrong file type for this emulator";
 
 // Success; no error
 int const blargg_ok = 0;
