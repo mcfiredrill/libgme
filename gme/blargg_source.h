@@ -40,8 +40,8 @@ void require( bool expr ); */
 
 void dprintf( const char format [], ... ); */
 static inline void blargg_dprintf_( const char [], ... ) { }
-#undef  dprintf
-#define dprintf (1) ? (void) 0 : blargg_dprintf_
+#undef  debug_printf
+#define debug_printf (1) ? (void) 0 : blargg_dprintf_
 
 /* If expr is false, prints file and line number to debug console/log, then
 continues execution normally. Meant for flagging potential problems or things

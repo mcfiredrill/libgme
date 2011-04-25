@@ -383,7 +383,7 @@ void Effects_Buffer::assign_buffers()
 			else
 			{
 				// TODO: this is a mess, needs refinement
-				dprintf( "Effects_Buffer ran out of buffers; using closest match\n" );
+				debug_printf( "Effects_Buffer ran out of buffers; using closest match\n" );
 				b = 0;
 				fixed_t best_dist = TO_FIXED( 8 );
 				for ( int h = buf_count; --h >= 0; )
